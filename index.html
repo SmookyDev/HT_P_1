@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <title>HASSAM TAHIR Portfolio - Video Editor & Visual Designer</title>
+    <meta name="description" content="HASSAM TAHIR is a professional video editor and visual designer specializing in cinematic storytelling, motion graphics, color grading, and advanced post-production techniques.">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="HASSAM TAHIR Portfolio">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://HaTh.com/">
+    <meta property="og:description" content="HASSAM TAHIR is a professional video editor and visual designer specializing in cinematic storytelling, motion graphics, color grading, and advanced post-production techniques.">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="HASSAM TAHIR Portfolio">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@HaTh0021">
+    <meta name="twitter:title" content="HASSAM TAHIR Portfolio">
+    <meta name="twitter:description" content="HASSAM TAHIR is a professional video editor and visual designer specializing in cinematic storytelling, motion graphics, color grading, and advanced post-production techniques.">
+    <meta name="twitter:creator" content="@HaTh0021">
+
+    <!-- Favicon -->
+    <!-- Favicon -->
+        <link rel="apple-touch-icon" sizes="180x180" href="images/fav/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/fav/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="images/fav/favicon-16x16.png">
+        <link rel="manifest" href="images/fav/site.webmanifest">
+
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'taupe-gray': '#bd485b',
+                        'pampas': '#bd485b',
+                        'mine-shaft': '#2A2A2A',
+                        'silver-chalice': '#0b0a0a',
+                        'emperor': '#545454',
+                        'gray': '#808080',
+                        'silver': '#C0C0C0',
+                    },
+                    fontFamily: {
+                               outfit: ['Outfit', 'sans-serif'],
+            montserrat: ['Montserrat', 'sans-serif'],
+            elsie: ['"Elsie Swash Caps"', 'serif'],
+                    },
+                    spacing: {
+                        '0.375': '0.375rem',
+                        '1.4': '1.4rem',
+                        '1.42': '1.42rem',
+                        '1.14': '1.14rem',
+                        '0.85': '0.85rem',
+                        '4.6': '4.6rem',
+                        '5.5': '5.5rem',
+                        '15.5': '15.5rem',
+                        '17.5': '17.5rem',
+                        '22.2': '22.2rem',
+                        '37': '9.25rem',
+                        '41': '10.25rem',
+                        '46': '11.5rem',
+                    },
+                    fontSize: {
+                        '0.928': '0.928rem',
+                        '1.4': '1.4rem',
+                        '1.75': '1.75rem',
+                        '2.625': '2.625rem',
+                        '6.5': '6.5rem',
+                    },
+                    borderRadius: {
+                        '30': '30px',
+                    },
+                    transitionDuration: {
+                        '600': '600ms',
+                    },
+                }
+            }
+        }
+    </script>
+      <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Elsie+Swash+Caps&display=swap" rel="stylesheet">
+
+
+    <!-- Optimized CSS -->
+    <link rel="stylesheet" href="css/tailwind-optimized.css">
+
+    <!-- Three.js for 3D elements -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- GSAP for enhanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+
+    <style>
+        body
+        {
+                  font-family: 'Outfit', sans-serif;
+        }
+        /* Custom styles that can't be replaced with Tailwind */
+        
+        .gallery-iframe {
+            width: 100%;
+            height: 100vh;
+            border: none;
+        }
+        
+        .vertical-rl {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+        
+        .horizontal-tb {
+            writing-mode: horizontal-tb;
+        }
+        
+        .contents-full {
+            position: relative;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+        }
+        
+        .bg-mine-shaft-texture {
+            background-color: #2A2A2A;
+            background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+        
+        .bg-gray-texture {
+            background-color: #0b0a0a;
+            background-image: radial-gradient(circle at 1px 1px, rgba(19, 18, 18, 0.085) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+        /* Section transitions */
+        
+        .section-transition {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .section-transition.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Background color transitions */
+        
+        .bg[data-color="dark"] .bg__bright {
+            animation: bgAnimationRemove 1s ease-in-out forwards;
+        }
+        
+        .bg[data-color="dark"] .bg__dark,
+        .bg[data-color="bright"] .bg__bright {
+            animation: bgAnimationAdd 1s ease-in-out forwards;
+        }
+        
+        .bg[data-color="bright"] .bg__dark {
+            animation: bgAnimationRemove 1s ease-in-out forwards;
+        }
+        
+        @keyframes bgAnimationAdd {
+            0% {
+                opacity: 0;
+                visibility: hidden;
+            }
+            100% {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+        
+        @keyframes bgAnimationRemove {
+            0% {
+                opacity: 1;
+                visibility: visible;
+            }
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+        /* Header color changes */
+        
+        #header[data-color="dark"] {
+            color: #bd485b;
+        }
+        
+        #header[data-color="bright"] {
+            color: #000000;
+        }
+        /* Scroll animations */
+        
+        @keyframes textFocusIn {
+            0% {
+                filter: blur(12px);
+                opacity: 0;
+            }
+            100% {
+                filter: blur(0px);
+                opacity: 1;
+            }
+        }
+        
+        .ts-focus-in[data-active="true"] {
+            animation: textFocusIn 1s ease-in-out forwards;
+        }
+        /* Scroll navigation animation */
+        
+        @keyframes scrollNav {
+            0% {
+                top: 0;
+                opacity: 1;
+            }
+            40% {
+                top: 50%;
+                opacity: 0.5;
+            }
+            80% {
+                top: 100%;
+                opacity: 0;
+            }
+            100% {
+                top: 0;
+                opacity: 0;
+            }
+        }
+        
+        .grid-container {
+            flex: 2;
+            position: relative;
+        }
+        
+        .grids {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 15px;
+            height: 100%;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .grid-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transform-style: preserve-3d;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .grid-item:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            background: rgba(255, 255, 255, 0.15);
+            z-index: 10;
+        }
+        /* Grid item positions */
+        
+        .item-1 {
+            grid-area: 1 / 4 / 2 / 5;
+        }
+        
+        .item-2 {
+            grid-area: 2 / 4 / 3 / 5;
+        }
+        
+        .item-3 {
+            grid-area: 2 / 3 / 3 / 4;
+        }
+        
+        .item-4 {
+            grid-area: 3 / 4 / 4 / 5;
+        }
+        
+        .item-5 {
+            grid-area: 3 / 3 / 4 / 4;
+        }
+        
+        .item-6 {
+            grid-area: 3 / 2 / 4 / 3;
+        }
+        
+        .item-7 {
+            grid-area: 4 / 4 / 5 / 5;
+        }
+        
+        .item-8 {
+            grid-area: 4 / 3 / 5 / 4;
+        }
+        
+        .item-9 {
+            grid-area: 4 / 2 / 5 / 3;
+        }
+        
+        .item-10 {
+            grid-area: 4 / 1 / 5 / 2;
+        }
+        
+        @media (max-width: 1200px) {
+            .grids {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(4, 1fr);
+            }
+            .item-1 {
+                grid-area: 1 / 3 / 2 / 4;
+            }
+            .item-2 {
+                grid-area: 2 / 3 / 3 / 4;
+            }
+            .item-3 {
+                grid-area: 2 / 2 / 3 / 3;
+            }
+            .item-4 {
+                grid-area: 3 / 3 / 4 / 4;
+            }
+            .item-5 {
+                grid-area: 3 / 2 / 4 / 3;
+            }
+            .item-6 {
+                grid-area: 3 / 1 / 4 / 2;
+            }
+            .item-7 {
+                grid-area: 4 / 3 / 5 / 4;
+            }
+            .item-8 {
+                grid-area: 4 / 2 / 5 / 3;
+            }
+            .item-9 {
+                grid-area: 4 / 1 / 5 / 2;
+            }
+            .item-10 {
+                grid-area: 4 / 1 / 5 / 2;
+                display: none;
+            }
+            /* Hide one item on smaller screens */
+        }
+        
+        @media (max-width: 900px) {
+            .content {
+                flex-direction: column;
+            }
+            .grid-container {
+                min-height: 600px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .grids {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(5, 1fr);
+                gap: 12px;
+            }
+            .item-1 {
+                grid-area: 1 / 2 / 2 / 3;
+            }
+            .item-2 {
+                grid-area: 2 / 2 / 3 / 3;
+            }
+            .item-3 {
+                grid-area: 2 / 1 / 3 / 2;
+            }
+            .item-4 {
+                grid-area: 3 / 2 / 4 / 3;
+            }
+            .item-5 {
+                grid-area: 3 / 1 / 4 / 2;
+            }
+            .item-6 {
+                grid-area: 4 / 2 / 5 / 3;
+            }
+            .item-7 {
+                grid-area: 4 / 1 / 5 / 2;
+            }
+            .item-8 {
+                grid-area: 5 / 2 / 6 / 3;
+            }
+            .item-9 {
+                grid-area: 5 / 1 / 6 / 2;
+            }
+            .item-10 {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .grids {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(9, 1fr);
+            }
+            .item-1 {
+                grid-area: 1 / 1 / 2 / 2;
+            }
+            .item-2 {
+                grid-area: 2 / 1 / 3 / 2;
+            }
+            .item-3 {
+                grid-area: 3 / 1 / 4 / 2;
+            }
+            .item-4 {
+                grid-area: 4 / 1 / 5 / 2;
+            }
+            .item-5 {
+                grid-area: 5 / 1 / 6 / 2;
+            }
+            .item-6 {
+                grid-area: 6 / 1 / 7 / 2;
+            }
+            .item-7 {
+                grid-area: 7 / 1 / 8 / 2;
+            }
+            .item-8 {
+                grid-area: 8 / 1 / 9 / 2;
+            }
+            .item-9 {
+                grid-area: 9 / 1 / 10 / 2;
+            }
+        }
+        
+        .scroll-nav__inside {
+            animation: scrollNav 5s infinite;
+        }
+        /* Parallax gallery effects */
+        
+        .ts-parallax-gallery-image {
+            transition: filter 0.5s ease;
+        }
+        
+        .ts-parallax-gallery-image img,
+        .ts-parallax-gallery-image .bg-layer {
+            transition: all 1s ease;
+        }
+        
+        .ts-parallax-gallery-image:nth-child(odd) .bg-layer {
+            transform: skewY(-10deg);
+        }
+        
+        .ts-parallax-gallery-image:nth-child(even) .bg-layer {
+            transform: skewY(10deg);
+        }
+        
+        .ts-parallax-gallery-image:not(.is-active) img {
+            filter: grayscale(100%);
+        }
+        
+        .ts-parallax-gallery-image.is-active img {
+            filter: grayscale(0);
+        }
+        
+        .ts-parallax-gallery-image.is-active .bg-layer {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        /* Project modal animations */
+        
+        .project-modal {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+        }
+        
+        .project-modal.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* Advanced Animation Styles */
+        .letter {
+            display: inline-block;
+            transform-origin: center bottom;
+        }
+        
+        .typewriter {
+            position: relative;
+        }
+        
+        .typewriter::after {
+            content: '|';
+            display: inline-block;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .floating-element {
+            will-change: transform;
+        }
+        
+        .magnetic {
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .progress-bar {
+            transform: scaleX(0);
+            transform-origin: left center;
+        }
+        
+        .split-text .letter {
+            transform-style: preserve-3d;
+        }
+        
+        .gradient-reveal {
+            background-size: 200% 100%;
+            animation-fill-mode: forwards;
+        }
+        
+        /* Video hover enhancements */
+        .video-item {
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+        }
+        
+        /* Hidden scrollbar while maintaining scroll functionality */
+        html {
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* Internet Explorer 10+ */
+        }
+        
+        html::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+            display: none; /* Chrome, Safari, Opera */
+        }
+        
+        body {
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* Internet Explorer 10+ */
+        }
+        
+        body::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+            display: none; /* Chrome, Safari, Opera */
+        }
+        
+        /* Enhanced Responsive Design */
+        
+        /* Floating navigation mobile adjustments */
+        @media (max-width: 768px) {
+            .floating-nav {
+                right: 12px !important;
+                transform: translateY(-50%) scale(0.9);
+            }
+            
+            .nav-dot {
+                width: 10px !important;
+                height: 10px !important;
+            }
+            
+            /* Disable complex animations on mobile for performance */
+            .magnetic {
+                pointer-events: none;
+            }
+            
+            .floating-element {
+                animation: none;
+            }
+        }
+        
+        /* Extra small devices */
+        @media (max-width: 480px) {
+            .floating-nav {
+                display: none; /* Hide on very small screens */
+            }
+            
+            .progress-bar {
+                height: 2px; /* Thinner progress bar on mobile */
+            }
+            
+            /* Ensure proper spacing on mobile */
+            .container {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+        }
+        
+        /* Video gallery mobile responsiveness */
+        @media (max-width: 768px) {
+            .video-item {
+                width: 280px !important;
+            }
+            
+            .main-video-container {
+                margin-bottom: 2rem;
+            }
+            
+            .video-scroll-gallery .flex {
+                gap: 1rem;
+            }
+        }
+        
+        /* Contact section mobile */
+        @media (max-width: 768px) {
+            .grid.md\:grid-cols-2 {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+        }
+        
+        /* Typography mobile adjustments */
+        @media (max-width: 480px) {
+            .text-3xl { font-size: 1.5rem !important; }
+            .text-4xl { font-size: 2rem !important; }
+            .text-5xl { font-size: 2.25rem !important; }
+            .text-6xl { font-size: 2.5rem !important; }
+            .md\:text-5xl { font-size: 2rem !important; }
+            .lg\:text-6xl { font-size: 2.25rem !important; }
+        }
+        
+        /* Ensure touch targets are large enough */
+        @media (max-width: 768px) {
+            button, a, .magnetic {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+    </style>
+</head>
+
+<body id="body" class="overflow-x-hidden font-serif text-pampas transition-colors scroll-smooth" data-bg-color="dark">
+    
+    
+    <!-- Scroll Progress Bar -->
+    <div class="progress-bar fixed top-0 left-0 h-1 bg-gradient-to-r from-[#bd485b] to-[#f1d7ff] z-50" style="width: 0%; transform-origin: left;"></div>
+    
+    <!-- Floating Navigation -->
+    <nav class="floating-nav fixed right-6 top-1/2 transform -translate-y-1/2 z-40 opacity-0 transition-opacity duration-300" id="floating-nav">
+        <div class="flex flex-col space-y-4">
+            <a href="#home" class="nav-dot w-3 h-3 rounded-full bg-white/30 hover:bg-[#bd485b] transition-all duration-300 border-2 border-white/20 hover:border-[#bd485b] magnetic" title="Home"></a>
+            <a href="#tools" class="nav-dot w-3 h-3 rounded-full bg-white/30 hover:bg-[#bd485b] transition-all duration-300 border-2 border-white/20 hover:border-[#bd485b] magnetic" title="Tools"></a>
+            <a href="#works" class="nav-dot w-3 h-3 rounded-full bg-white/30 hover:bg-[#bd485b] transition-all duration-300 border-2 border-white/20 hover:border-[#bd485b] magnetic" title="Works"></a>
+            <a href="#contact" class="nav-dot w-3 h-3 rounded-full bg-white/30 hover:bg-[#bd485b] transition-all duration-300 border-2 border-white/20 hover:border-[#bd485b] magnetic" title="Contact"></a>
+        </div>
+    </nav>
+
+    <!-- Background -->
+    <div id="bg" class="fixed left-0 top-0 -z-10 h-full w-screen" data-color="dark">
+        <div class="relative h-full w-full">
+            <div class="bg__dark absolute left-0 top-0 h-full w-full bg-gray-texture opacity-100"></div>
+            <div class="bg__bright absolute left-0 top-0 h-full w-full bg-gray-texture opacity-0"></div>
+        </div>
+    </div>
+
+
+    <!-- Main Content -->
+    <main id="main" class="overflow-x-hidden">
+        
+
+
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-screen overflow-hidden">
+            <iframe src="hero_verse.html" style="width: 100%; height: 100vh; border: none;"></iframe>
+            <!-- 3D Background Video -->
+        </section>
+
+
+
+           <!-- BioGraphy -->
+        <section class="Biography">
+        <iframe src="Biography.html" style="width: 100%; height: 100vh; border: none;"></iframe>
+        </section>
+
+
+            <!-- Professional Aresnal Section -->
+        <section id="tools" class="relative py-24 md:py-28 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+            <div class="container px-5 md:px-20 max-w-none relative z-10">
+                <!-- Section Header -->
+                <div class="text-center mb-8 section-transition">
+                    <h2 class="ts-focus-in text-current flex flex-col items-center" data-active="true">
+                        <span class="text-lg leading-none font-medium mb-4 text-[#f1d7ff]">
+                            (Software & Tools)
+                        </span>
+                        <div class="flex flex-col gap-4 text-3xl md:text-5xl leading-none font-medium font-elsie text-[#bd485b]">
+                            <span class="split-text">Professional</span>
+                            <span class="split-text magnetic floating-element">Arsenal</span>
+                        </div>
+                    </h2>
+                </div>
+
+
+                <!-- Professional Aresnal -->
+                <div class="professional_aresnal">
+                <iframe src="professional_aresnal.html" style="width: 100%; height: 100vh; border: none;"></iframe>
+                </div>
+            
+
+                <!-- 3D Software Showcase Bounce -->
+                <div id="software-3d-showcase" class="relative h-64 md:h-80 my-5">
+                    <!-- 3D Canvas will be inserted here -->
+                    <canvas id="software-canvas" class="w-full h-full"></canvas>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Works Section   & Creative Showcase Section -->
+        <section id="works" class="relative py-24 bg-gray-texture text-pampas overflow-hidden">
+            <div class="container px-5 md:px-20 max-w-none relative z-10">
+                <!-- Works Header -->
+                <div class="text-center mb-10 section-transition">
+                    <h2 class="ts-focus-in text-current flex flex-col items-center" data-active="true">
+                        <span class="text-lg leading-none font-medium mb-4 text-silver-chalice">
+                            (Video Portfolio)
+                        </span>
+                        <div class="flex flex-col gap-4 text-3xl md:text-5xl lg:text-6xl leading-none font-elsie font-medium text-[#f1d7ff]">
+                            <span class="split-text gradient-reveal" style="background: linear-gradient(90deg, #f1d7ff 0%, #bd485b 50%, #f1d7ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size: 200% 100%;">Creative</span>
+                            <span class="split-text magnetic floating-element">Showcase</span>
+                        </div>
+                    </h2>
+                </div>
+                <div class="my-5">
+                    <iframe src="creative_showcase.html" style="width: 100%; height: 100vh; border: none;"></iframe>
+                </div>
+
+                <!-- Interactive Video Gallery -->
+                <div id="video-gallery" class="mb-20">
+
+                            <h3 class="text-3xl md:text-5xl lg:text-6xl font-elsie font-medium mb-8 py-5 text-center text-[#bd485b] section-transition typewriter magnetic" data-parallax="0.3">
+                            Project Gallery
+                        </h3>
+                    <!-- Main featured video -->
+                    <div class="main-video-container mb-12 section-transition">
+                        <div class="relative overflow-hidden rounded-2xl bg-gray-texture max-w-6xl mx-auto shadow-2xl group">
+                            <video id="main-portfolio-video" class="w-full h-56 md:h-auto transition-all duration-500 group-hover:scale-105" controls>
+                                <source src="videos/1.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+
+                            <!-- Video overlay controls -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <button class="play-button w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300">
+                                        <svg class="w-8 h-8 text-[#f1d7ff] ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M8 5v14l11-7z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            
+                            <!-- Video info -->
+                            <div class="absolute bottom-6 left-6 text-[#f1d7ff]">
+                                <h4 class="text-xl md:text-2xl font-medium mb-2">Featured Video Project</h4>
+                                <p class="text-base opacity-90">Professional video editing with cinematic storytelling and visual effects</p>
+                                <div class="flex items-center gap-4 mt-4">
+                                    <span class="text-xs md:text-sm bg-white/20 px-3 py-1 rounded-full">Commercial</span>
+                                    <span class="text-xs md:text-sm bg-white/20 px-3 py-1 rounded-full">Motion Graphics</span>
+                                    <span class="text-xs md:text-sm bg-white/20 px-3 py-1 rounded-full">Color Grading</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video thumbnails scroll gallery -->
+                    <div class="video-scroll-gallery relative py-10">
+
+                        <!-- Horizontal scrolling container -->
+                        <div class="scroll-container relative overflow-hidden">
+                            <div class="flex space-x-6 overflow-x-auto scrollbar-hide pb-6" style="scroll-behavior: smooth;">
+                                <!-- Video 1 -->
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/Pakistan.mp4" data-title="Commercial Project" data-description="Brand storytelling with dynamic cuts and transitions">
+                                    <div class="relative overflow-hidden rounded-xl bg-gray-texture shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                        <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="videos/Pakistan.mp4" type="video/mp4">
+                                        </video>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                    <svg class="w-5 h-5 text-[#f1d7ff] ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute bottom-4 left-4 text-[#f1d7ff]">
+                                            <h4 class="text-lg font-medium">Commercial Project</h4>
+                                            <p class="text-sm opacity-80">Brand storytelling</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Video 2 -->
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/Sahiba .mp4" data-title="Music Video" data-description="Creative visual effects synchronized with beat">
+                                    <div class="relative overflow-hidden rounded-xl bg-gray-texture shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                        <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="videos/Sahiba .mp4" type="video/mp4">
+                                        </video>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                    <svg class="w-5 h-5 text-[#f1d7ff] ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute bottom-4 left-4 text-[#f1d7ff]">
+                                            <h4 class="text-lg font-medium">Music Video</h4>
+                                            <p class="text-sm opacity-80">Creative visual effects</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Video 3 -->
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/2.mp4" data-title="Documentary" data-description="Emotional storytelling with careful pacing">
+                                    <div class="relative overflow-hidden rounded-xl bg-gray-texture shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                        <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="videos/2.mp4" type="video/mp4">
+                                        </video>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                    <svg class="w-5 h-5 text-[#f1d7ff] ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute bottom-4 left-4 text-[#f1d7ff]">
+                                            <h4 class="text-lg font-medium">Documentary</h4>
+                                            <p class="text-sm opacity-80">Emotional storytelling</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Video 4 -->
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/4.mp4" data-title="Motion Graphics" data-description="Abstract animations and kinetic typography">
+                                    <div class="relative overflow-hidden rounded-xl bg-gray-texture shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                        <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="videos/4.mp4" type="video/mp4">
+                                        </video>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                    <svg class="w-5 h-5 text-[#f1d7ff] ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute bottom-4 left-4 text-[#f1d7ff]">
+                                            <h4 class="text-lg font-medium">Motion Graphics</h4>
+                                            <p class="text-sm opacity-80">Abstract animations</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Video 5 -->
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/3.mp4" data-title="Color Grading Showcase" data-description="Professional color correction and grading techniques">
+                                    <div class="relative overflow-hidden rounded-xl bg-gray-texture shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                        <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="videos/3.mp4" type="video/mp4">
+                                        </video>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                    <svg class="w-5 h-5 text-[#f1d7ff] ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute bottom-4 left-4 text-[#f1d7ff]">
+                                            <h4 class="text-lg font-medium">Color Grading</h4>
+                                            <p class="text-sm opacity-80">Professional grading</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Video 6 -->
+                                <div class="video-item flex-shrink-0 w-80 md:w-96 group cursor-pointer" data-video="videos/1.mp4" data-title="VFX & Compositing" data-description="Advanced visual effects and compositing work">
+                                    <div class="relative overflow-hidden rounded-xl bg-gray-texture shadow-lg group-hover:shadow-2xl transition-all duration-500">
+                                        <video class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" muted>
+                                            <source src="videos/1.mp4" type="video/mp4">
+                                        </video>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                                    <svg class="w-5 h-5 text-[#f1d7ff] ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute bottom-4 left-4 text-[#f1d7ff]">
+                                            <h4 class="text-lg font-medium">VFX & Compositing</h4>
+                                            <p class="text-sm opacity-80">Advanced visual effects</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Scroll navigation for gallery -->
+                            <div class="flex justify-center mt-8 space-x-4">
+                                <button class="gallery-nav-btn gallery-prev w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 disabled:opacity-50 magnetic floating-element">
+                                    <svg class="w-5 h-5 text-[#f1d7ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                    </svg>
+                                </button>
+                                <button class="gallery-nav-btn gallery-next w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 magnetic floating-element">
+                                    <svg class="w-5 h-5 text-[#f1d7ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                <!-- View All CTA -->
+                <div class="ts-focus-in mt-24 flex flex-col items-center md:mt-32 section-transition" data-active="true">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl md:text-3xl font-medium mb-4 text-[#f1d7ff]">
+                            Explore Complete Portfolio
+                        </h3>
+                        <p class="text-base md:text-lg text-silver-chalice max-w-2xl">
+                            Discover more projects, case studies, and behind-the-scenes content
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row gap-4">
+
+                        <a href="new_video_3.html" class="group relative inline-flex items-center justify-between gap-3 bg-transparent hover:bg-white/10 transition-all duration-300 rounded-full px-8 py-4 border border-pampas text-[#f1d7ff] magnetic floating-element">
+                            <span class="font-serif-en text-lg">VIEW ALL WORKS</span>
+                            <div class="w-8 h-8 rounded-full border border-gray flex items-center justify-center group-hover:border-pampas transition-all duration-300">
+                                <svg class="w-4 h-4 text-[#f1d7ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                </svg>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Particle Hero Section -->
+        <section class="practical-hero">
+        <iframe src="particle-hero.html" class="w-[100%] h-[200vh] md:h-[80vh] border-none"></iframe> 
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="relative py-24 md:py-32 bg-gray-texture text-pampas">
+            <div class="container px-5 md:px-20 max-w-none">
+                <!-- Contact Header -->
+                <div class="text-center mb-16 section-transition">
+                    <h1 class="ts-focus-in text-current flex flex-col items-center" data-active="true">
+                        <span class="text-lg leading-none font-medium mb-4 text-silver-chalice">
+                            (Contact)
+                        </span>
+                        <div class="flex flex-col gap-4 text-3xl md:text-5xl leading-none font-medium">
+                            <span class="split-text floating-element">Let's Create</span>
+                            <span class="split-text magnetic">Something Amazing</span>
+                        </div>
+                    </h1>
+                </div>
+
+                <!-- Contact Content -->
+                <div class="grid md:grid-cols-2 gap-12 md:gap-20 max-w-6xl mx-auto">
+                    <!-- Contact Info -->
+                    <div class="ts-focus-in section-transition" data-active="true">
+                        <h2 class="text-2xl md:text-3xl font-medium mb-8">
+                            Get In Touch
+                        </h2>
+
+                        <div class="space-y-6 text-base md:text-lg leading-relaxed">
+                            <p>
+                                I'm always excited to work on new projects and collaborate with creative individuals and teams. Whether you need video editing, motion graphics, or visual design, let's discuss how we can bring your vision to life.
+                            </p>
+
+                            <div class="space-y-4">
+                                <div class="border-t border-emperor pt-4">
+                                    <dt class="font-serif-en text-sm text-silver-chalice font-medium uppercase">Email</dt>
+                                    <dd class="text-lg">
+                                        <a href="mailto:taaaaiki.mode@gmail.com?subject=Project Inquiry" class="ts-text-link hover:text-silver-chalice transition-colors">
+                                            taaaaiki.mode@gmail.com
+                                        </a>
+                                    </dd>
+                                </div>
+
+                                <div class="border-t border-emperor pt-4">
+                                    <dt class="font-serif-en text-sm text-silver-chalice font-medium uppercase">Social</dt>
+                                    <dd class="text-lg space-y-2">
+                                        <div>
+                                            <a href="https://x.com/HaTh0021" target="_blank" class="ts-text-link hover:text-silver-chalice transition-colors">
+                                                X (Twitter)
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <a href="https://www.instagram.com/taikisato_/" target="_blank" class="ts-text-link hover:text-silver-chalice transition-colors">
+                                                Instagram
+                                            </a>
+                                        </div>
+                                    </dd>
+                                </div>
+
+                                <div class="border-t border-emperor pt-4">
+                                    <dt class="font-serif-en text-sm text-silver-chalice font-medium uppercase">Response Time</dt>
+                                    <dd class="text-lg">Usually within 24 hours</dd>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-wrapper" class="relative mt-10">
+        <footer id="footer" class="relative w-full overflow-hidden text-pampas bg-gray-texture">
+            <div class="container px-5 pt-16 md:px-20 md:pt-24 max-w-none">
+
+                <div class="mt-20 hidden justify-end md:flex">
+                    <a href="#home" class="ts-text-link ts-anchor font-serif-en text-lg hover:text-silver-chalice transition-colors magnetic floating-element" onclick="event.preventDefault(); window.scrollAnimations && window.scrollAnimations.scrollToSection('#home');">BACK TO TOP</a>
+                </div>
+
+                <ul class="mt-12 mb-5 flex flex-wrap items-center justify-center gap-x-7 gap-y-4 border-t border-emperor pt-10 font-serif-en md:mt-6 md:justify-between md:gap-8">
+                    <li class="inline-block">
+                        <a href="https://x.com/HaTh0021" target="_blank" class="ts-text-link md:text-xl hover:text-silver-chalice transition-colors">
+                            X (Twitter)
+                        </a>
+                    </li>
+                    <li class="inline-block">
+                        <a href="https://www.instagram.com/taikisato_/" target="_blank" class="ts-text-link md:text-xl hover:text-silver-chalice transition-colors">
+                            INSTAGRAM
+                        </a>
+                    </li>
+                    <li class="inline-block w-full text-center md:ml-auto md:w-auto">
+                        <small class="text-base text-silver-chalice">
+                            &copy; 2024 HASSAM TAHIR
+                        </small>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+    <script src="components/Advanced3DEffects.js"></script>
+    <script src="js/scroll-animations.js"></script>
+    <script src="js/lazy-loading.js"></script>
+    <!-- Main Script -->
+</body>
+
+</html>

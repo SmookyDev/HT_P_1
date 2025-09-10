@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio</title>
+
+  <!-- GSAP -->
+  <script src="https://cdn.jsdelivr.net/gh/greensock/GSAP/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/greensock/GSAP/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/greensock/GSAP/dist/ScrollSmoother.min.js"></script>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            rose: '#bd485b',
+            roseLight: '#bd487e',
+            lilac: '#f1d7ff',
+            bgDark: '#0b0a0a',
+          },
+          fontFamily: {
+            outfit: ['Outfit', 'sans-serif'],
+            montserrat: ['Montserrat', 'sans-serif'],
+            elsie: ['"Elsie Swash Caps"', 'serif'],
+          },
+          screens: {
+            xs: '480px',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Elsie+Swash+Caps&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+  background: #0b0a0a;
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Scrollbar styling for desktop */
+body::-webkit-scrollbar {
+  width: 8px;
+   display: none; 
+}
+
+body::-webkit-scrollbar-track {
+  background: #0b0a0a;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #bd485b;
+  border-radius: 4px;
+  border: 1px solid #bd485b;
+}
+
+/* Hide scrollbar completely on mobile view */
+@media (max-width: 768px) {
+  body {
+    -ms-overflow-style: none;  /* for Internet Explorer, Edge */
+    scrollbar-width: none;     /* for Firefox */
+  }
+  body::-webkit-scrollbar {
+    display: none;             /* for Chrome, Safari, Opera */
+  }
+}
+
+.rose-text {
+  color: #bd485b !important;
+  filter: drop-shadow(0px 0px 1px #bd487e);
+}
+
+.dmslt {
+  filter: url(#sandy);
+}
+
+.dmslt2 {
+  filter: url(#sandy2);
+}
+
+/* Enhanced Animation Styles */
+.letter {
+  display: inline-block;
+  transform-origin: center bottom;
+}
+
+.typewriter {
+  position: relative;
+}
+
+.typewriter::after {
+  content: '|';
+  display: inline-block;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.floating-element {
+  will-change: transform;
+}
+
+.magnetic {
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.split-text .letter {
+  transform-style: preserve-3d;
+}
+
+.gradient-reveal {
+  background-size: 200% 100%;
+  animation-fill-mode: forwards;
+}
+
+  </style>
+</head>
+
+<body class="flex flex-col items-center justify-center">
+
+  <div id="content" class="relative w-full">
+
+    <!-- Section One -->
+    <section class="h-screen flex flex-col items-center justify-center text-center px-4">
+      <p class="mb-5 text-[10vw] sm:text-[55px] text-roseLight leading-none">
+        <span class="font-elsie text-[12vw] sm:text-[60px] text-rose split-text magnetic">HASSAM</span> <span class="typewriter">TAHIR</span>
+      </p>
+      <p class="text-white text-[8vw] sm:text-[50px] floating-element">Scroll</p>
+      <span class="scroll-text font-elsie text-white text-[6vw] sm:text-[28px] magnetic">Down</span>
+    </section>
+
+    <!-- Section Two (Wrapper Added) -->
+    <!-- Section Two (Wrapper Fixed) -->
+<section class="container-one h-[90vh] xl:h-screen xl:min-h-[800px] flex justify-center items-center px-4">
+  <div class="relative flex flex-wrap items-center justify-center gap-4 w-full max-w-[1110px] h-[500px] sm:h-[700px]">
+
+    <span class="left-title absolute top-[20%] left-[10%] font-elsie text-[14vw] sm:text-[136px] text-lilac mix-blend-color-dodge split-text">PORT</span>
+    <span class="right-title absolute bottom-[35%] right-[10%] sm:right-[20%] font-montserrat text-[12vw] sm:text-[100px] text-lilac split-text magnetic">FOLIO</span>
+
+    <p class="flex-1 text-right text-[#eaddeb] text-[3vw] sm:text-[14px] uppercase font-outfit font-light leading-snug floating-element" data-parallax="0.2">
+      VIDEO EDITOR,<br> MOTION GRAPHICS,<br> VISUAL DESIGNER,<br> CREATIVE DIRECTOR.
+    </p>
+
+    <!-- Fixed Masked Image -->
+    <svg class="content__img basis-[70%] sm:basis-[400px]" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <filter id="sandy">
+          <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="13" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="60" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+        <mask id="circleMask">
+          <circle cx="50%" cy="50%" r="0" fill="white" class="dmslt" />
+        </mask>
+      </defs>
+      <image 
+        href="images/pfhm.png" 
+        width="100%" 
+        height="100%" 
+        mask="url(#circleMask)" 
+        preserveAspectRatio="xMidYMid slice"
+        style="filter: brightness(120%);" />
+    </svg>
+  </div>
+</section>
+
+
+    <!-- Section Three (Wrapper Added) -->
+    <section class="container-two h-[90vh] min-h-[1000px] xl:h-[150vh] flex items-center justify-center text-white px-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 grid-rows-[auto_auto_auto] w-full max-w-[1000px] text-lilac gap-6">
+
+        <div class="title-top relative sm:top-[200px] sm:left-[100px] mix-blend-color-dodge">
+          <p class="text-[12vw] sm:text-[100px] font-elsie split-text gradient-reveal magnetic" style="background: linear-gradient(90deg, #f1d7ff 0%, #bd485b 50%, #f1d7ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size: 200% 100%;">Motion</p>
+        </div>
+
+        <!-- Masked Image -->
+        <svg class="content__img col-span-1 sm:col-span-2 row-start-2 row-end-3 w-full h-auto" width="1000" height="450" viewBox="0 0 1000 450">
+          <defs>
+            <filter id="sandy2">
+              <feTurbulence type="fractalNoise" baseFrequency="0.1" numOctaves="1" result="noise"></feTurbulence>
+              <feDisplacementMap in="SourceGraphic" in2="noise" result="displacement" scale="124"
+                xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+              <feMorphology operator="dilate" radius="2" result="morph" in="displacement"></feMorphology>
+            </filter>
+            <mask id="circleMask2">
+              <circle cx="50%" cy="50%" r="0" fill="white" class="dmslt2" data-value-final="1000" />
+            </mask>
+          </defs>
+          <image href="images/hero_2.png" width="1000" height="571" mask="url(#circleMask2)"
+            style="filter: brightness(120%);" />
+        </svg>
+
+        <!-- Text + Alchemy Responsive -->
+<!-- Text + Alchemy Responsive -->
+<div class="row-start-3 col-span-1 sm:col-span-2 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 pt-4 w-full">
+  <div class="text-bottom-left text-[3vw] sm:text-[14px] font-outfit uppercase leading-snug sm:max-w-[60%]">
+    Crafting cinematic stories through video editing, motion graphics, and visual design. I transform ideas into
+    compelling visuals with precision, creativity, and a strong attention to detail—bringing concepts to life in ways
+    that inspire and captivate audiences.
+  </div>
+  <div class="text-bottom-right w-full sm:w-auto text-center sm:text-right">
+    <p class="text-[12vw] sm:text-[87px] leading-none break-words split-text magnetic floating-element">Alchemy</p>
+  </div>
+</div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- GSAP Animations -->
+  <script>
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
+    const smoother = ScrollSmoother.create({
+      content: "#content",
+      smooth: 2,
+      effects: true
+    });
+
+    // Independent reveals
+    gsap.to(".dmslt", {
+      scrollTrigger: {
+        trigger: ".container-one",
+        start: "top center",
+        end: "bottom center",
+        scrub: 2,
+      },
+      r: 600
+    });
+
+    gsap.to(".left-title", {
+      scrollTrigger: {
+        trigger: ".container-one",
+        start: "top center",
+        end: "60% center",
+        scrub: true,
+      },
+      left: 48,
+      top: -60,
+      opacity: 1
+    });
+
+    gsap.to(".right-title", {
+      scrollTrigger: {
+        trigger: ".container-one",
+        start: "top center",
+        end: "bottom 80%",
+        scrub: true,
+      },
+      bottom: "-4%",
+      opacity: 1
+    });
+
+    gsap.to(".dmslt2", {
+      scrollTrigger: {
+        trigger: ".container-two",
+        start: "top center",
+        end: "bottom center",
+        scrub: 2,
+      },
+      r: 1000
+    });
+
+    gsap.to(".title-top", {
+      scrollTrigger: {
+        trigger: ".container-two",
+        start: "top center",
+        end: "60% center",
+        scrub: true,
+      },
+      left: 0,
+      top: 20
+    });
+
+    gsap.to(".text-bottom-right", {
+      scrollTrigger: {
+        trigger: ".container-two",
+        start: "top center",
+        end: "60% center",
+        scrub: true,
+      },
+      x: -48,
+      y: 0
+    });
+
+    // Enhanced Animations
+    
+    // Split text reveal animation
+    const splitTextElements = document.querySelectorAll('.split-text');
+    
+    splitTextElements.forEach(element => {
+      const text = element.textContent;
+      const letters = text.split('').map(letter => 
+        letter === ' ' ? '&nbsp;' : `<span class="letter">${letter}</span>`
+      ).join('');
+      
+      element.innerHTML = letters;
+      
+      gsap.fromTo(element.querySelectorAll('.letter'), {
+        opacity: 0,
+        y: 50,
+        rotateX: 90,
+      }, {
+        opacity: 1,
+        y: 0,
+        rotateX: 0,
+        duration: 0.05,
+        stagger: 0.02,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: element,
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        }
+      });
+    });
+
+    // Typewriter effect
+    const typewriterElements = document.querySelectorAll('.typewriter');
+    
+    typewriterElements.forEach(element => {
+      const text = element.textContent;
+      element.textContent = '';
+      
+      ScrollTrigger.create({
+        trigger: element,
+        start: "top 80%",
+        onEnter: () => {
+          let i = 0;
+          const typeInterval = setInterval(() => {
+            element.textContent += text[i];
+            i++;
+            if (i >= text.length) {
+              clearInterval(typeInterval);
+            }
+          }, 100);
+        }
+      });
+    });
+
+    // Floating animation for hero elements
+    gsap.to(".floating-element", {
+      y: -15,
+      duration: 2,
+      ease: "power2.inOut",
+      repeat: -1,
+      yoyo: true,
+      stagger: 0.3
+    });
+
+    // Gradient text reveal
+    gsap.fromTo(".gradient-reveal", {
+      backgroundPosition: "-100% 0",
+    }, {
+      backgroundPosition: "100% 0",
+      duration: 2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".gradient-reveal",
+        start: "top 80%",
+        toggleActions: "play none none none"
+      }
+    });
+
+    // Parallax effects
+    const parallaxElements = document.querySelectorAll('[data-parallax]');
+    
+    parallaxElements.forEach(element => {
+      const speed = element.dataset.parallax || 0.5;
+      
+      gsap.to(element, {
+        yPercent: -30 * speed,
+        ease: "none",
+        scrollTrigger: {
+          trigger: element,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true
+        }
+      });
+    });
+
+    // Magnetic hover effect
+    const magneticElements = document.querySelectorAll('.magnetic');
+    
+    magneticElements.forEach(element => {
+      element.addEventListener('mousemove', (e) => {
+        const rect = element.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        gsap.to(element, {
+          x: x * 0.2,
+          y: y * 0.2,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      });
+      
+      element.addEventListener('mouseleave', () => {
+        gsap.to(element, {
+          x: 0,
+          y: 0,
+          duration: 0.5,
+          ease: "elastic.out(1, 0.3)"
+        });
+      });
+    });
+  </script>
+</body>
+</html>

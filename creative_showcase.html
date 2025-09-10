@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Image Carousel</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+          <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Elsie+Swash+Caps&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: transparent;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .description {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .instructions {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+        
+        .stage {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            perspective: 2000px;
+            width: 300px;
+            height: 400px;
+        }
+        
+        .ring {
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+        
+        .img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            transition: opacity 0.3s;
+            backface-visibility: hidden;
+        }
+        
+        .controls {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+        }
+        
+        button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+            font-family: 'Elsie Swash Caps', serif;
+        }
+        
+        button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px) scale(1.05);
+        }
+        
+        /* Enhanced Animation Styles */
+        .letter {
+            display: inline-block;
+            transform-origin: center bottom;
+        }
+        
+        .split-text .letter {
+            transform-style: preserve-3d;
+        }
+        
+        .floating-element {
+            will-change: transform;
+        }
+        
+        .magnetic {
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .stage {
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .counter {
+    
+            margin-top: 20px;
+            font-size: 1.2rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px 20px;
+            border-radius: 50px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            .description {
+                font-size: 1rem;
+            }
+            .container {
+                width: 250px;
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="stage">
+        <div class="container">
+            <div class="ring">
+                <!-- Images will be created dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <div class="controls floating-element">
+        <button id="prevBtn" class="magnetic">Previous</button>
+        <button id="nextBtn" class="magnetic">Next</button>
+    </div>
+
+    <div class="counter floating-element">
+        Image: <span id="currentIndex">1</span> / <span id="totalImages">10</span>
+    </div>
+
+    <script>
+        // Replace this array with your own image paths
+        // You can use any file names and extensions (jpg, png, etc.)
+        const imagePaths = [
+            'images/abd_1.png',
+            'images/abd_2.png',
+            'images/abd_1.png',
+            'images/abd_3.png',
+            'images/abd_4.png',
+            'images/abd_5.png',
+            'images/abd_6.png',
+            'images/abd_2.png',
+            'images/abd_1.png',
+            'images/abd_3.png'
+        ];
+
+        // For local images, you would use paths like:
+        // 'images/your-image-name.jpg',
+        // 'images/another-image.png',
+        // 'photos/any-name-you-want.jpeg',
+
+        // Create image elements dynamically based on your imagePaths array
+        const ring = document.querySelector('.ring');
+        const totalImages = imagePaths.length;
+
+        // Update the total images counter
+        document.getElementById('totalImages').textContent = totalImages;
+
+        for (let i = 0; i < totalImages; i++) {
+            const imgDiv = document.createElement('div');
+            imgDiv.className = 'img';
+            ring.appendChild(imgDiv);
+        }
+
+        let xPos = 0;
+        let isDragging = false;
+        let currentRotation = 180;
+
+        // Function to get background position for parallax effect
+        function getBgPos(i) {
+            return (100 - gsap.utils.wrap(0, 360, currentRotation - 180 - i * (360 / totalImages)) / 360 * 500) + 'px 0px';
+        }
+
+        // Function to update the display
+        function updateDisplay() {
+            // Calculate which image is front and center (simplified)
+            const currentImage = Math.round((currentRotation % 360) / (360 / totalImages)) % totalImages;
+            document.getElementById('currentIndex').textContent = (currentImage + 1);
+        }
+
+        // Initialize the animation
+        gsap.timeline()
+            .set('.ring', {
+                rotationY: currentRotation,
+                cursor: 'grab'
+            })
+            .set('.img', {
+                rotateY: (i) => i * -(360 / totalImages),
+                transformOrigin: '50% 50% 500px',
+                z: -500,
+                backgroundImage: (i) => `url(${imagePaths[i]})`,
+                backgroundPosition: (i) => getBgPos(i),
+                backfaceVisibility: 'hidden'
+            })
+            .from('.img', {
+                duration: 1.5,
+                y: 200,
+                opacity: 0,
+                stagger: 0.1,
+                ease: 'expo'
+            })
+            .add(() => {
+                // Add mouseenter and mouseleave events with vanilla JS
+                const images = document.querySelectorAll('.img');
+
+                images.forEach(img => {
+                    img.addEventListener('mouseenter', (e) => {
+                        gsap.to('.img', {
+                            opacity: (i, t) => (t == e.currentTarget) ? 1 : 0.5,
+                            ease: 'power3'
+                        });
+                    });
+
+                    img.addEventListener('mouseleave', () => {
+                        gsap.to('.img', {
+                            opacity: 1,
+                            ease: 'power2.inOut'
+                        });
+                    });
+                });
+
+                updateDisplay();
+            }, '-=0.5');
+
+        // Add event listeners for dragging with vanilla JS
+        window.addEventListener('mousedown', dragStart);
+        window.addEventListener('touchstart', dragStart);
+
+        window.addEventListener('mouseup', dragEnd);
+        window.addEventListener('touchend', dragEnd);
+
+        // Add navigation button event listeners
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            currentRotation += 360 / totalImages;
+            gsap.to('.ring', {
+                rotationY: currentRotation,
+                onUpdate: () => {
+                    gsap.set('.img', {
+                        backgroundPosition: (i) => getBgPos(i)
+                    });
+                    updateDisplay();
+                }
+            });
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            currentRotation -= 360 / totalImages;
+            gsap.to('.ring', {
+                rotationY: currentRotation,
+                onUpdate: () => {
+                    gsap.set('.img', {
+                        backgroundPosition: (i) => getBgPos(i)
+                    });
+                    updateDisplay();
+                }
+            });
+        });
+
+        function dragStart(e) {
+            if (e.touches) {
+                e.clientX = e.touches[0].clientX;
+            }
+            xPos = Math.round(e.clientX);
+            gsap.set('.ring', {
+                cursor: 'grabbing'
+            });
+            isDragging = true;
+
+            window.addEventListener('mousemove', drag);
+            window.addEventListener('touchmove', drag);
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+
+            if (e.touches) {
+                e.clientX = e.touches[0].clientX;
+            }
+
+            const deltaX = Math.round(e.clientX) - xPos;
+            currentRotation -= deltaX % 360;
+
+            gsap.to('.ring', {
+                rotationY: currentRotation,
+                onUpdate: () => {
+                    gsap.set('.img', {
+                        backgroundPosition: (i) => getBgPos(i)
+                    });
+                    updateDisplay();
+                }
+            });
+
+            xPos = Math.round(e.clientX);
+        }
+
+        function dragEnd() {
+            isDragging = false;
+            window.removeEventListener('mousemove', drag);
+            window.removeEventListener('touchmove', drag);
+            gsap.set('.ring', {
+                cursor: 'grab'
+            });
+        }
+        
+        // Enhanced Animations
+        
+        // Floating animation for elements
+        gsap.to(".floating-element", {
+            y: -10,
+            duration: 2,
+            ease: "power2.inOut",
+            repeat: -1,
+            yoyo: true,
+            stagger: 0.3
+        });
+        
+        // Magnetic hover effect
+        const magneticElements = document.querySelectorAll('.magnetic');
+        
+        magneticElements.forEach(element => {
+            element.addEventListener('mousemove', (e) => {
+                const rect = element.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                gsap.to(element, {
+                    x: x * 0.3,
+                    y: y * 0.3,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                gsap.to(element, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.5,
+                    ease: "elastic.out(1, 0.3)"
+                });
+            });
+        });
+        
+        // Enhanced button click animations
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                gsap.fromTo(btn, {
+                    scale: 0.95,
+                }, {
+                    scale: 1.1,
+                    duration: 0.1,
+                    yoyo: true,
+                    repeat: 1,
+                    ease: "power2.out"
+                });
+            });
+        });
+        
+        // Carousel entrance animation enhancement
+        gsap.fromTo('.container', {
+            scale: 0.8,
+            opacity: 0,
+            rotateX: 15
+        }, {
+            scale: 1,
+            opacity: 1,
+            rotateX: 0,
+            duration: 1.2,
+            ease: "power3.out",
+            delay: 0.3
+        });
+    </script>
+</body>
+
+</html>
